@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY Blogs</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>/* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F4F4; /* Soft Gray */
+            color: #2C2C2C; /* Charcoal */
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background: #2C2C2C; /* Charcoal Gray */
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #E8A87C; /* Warm Coral */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        nav h1 {
+            font-size: 2rem;
+            color: #E8A87C; /* Warm Coral */
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 25px;
+        }
+        
+        nav ul li {
+            display: inline-block;
+        }
+        
+        nav ul li a {
+            color: #F4F4F4; /* Soft Gray */
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            background: #E8A87C; /* Warm Coral */
+            color: #2C2C2C; /* Charcoal */
+            padding: 8px 16px;
+        }
+        
+        /* Blog Container */
+        #blog-container {
+            width: 85%;
+            max-width: 1100px;
+            margin: 60px auto;
+            text-align: center;
+        }
+        
+        #blog-container h2 {
+            font-size: 2.2rem;
+            color: #2C2C2C; /* Charcoal */
+            margin-bottom: 30px;
+        }
+        
+        /* Blog Posts Grid */
+        #posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Individual Blog Post */
+        .post {
+            background: #FFF;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border-left: 5px solid #41B3A3; /* Teal Green */
+        }
+        
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Blog Post Content */
+        .post h3 {
+            margin: 0 0 12px;
+            color: #2C2C2C; /* Charcoal */
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .post p {
+            color: #555;
+            font-size: 1rem;
+        }
+        
+        .post small {
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2C2C2C; /* Charcoal Gray */
+            color: #E8A87C;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        
+        
+        
+        
+        /* Background Particles */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color:rgb(150, 171, 164);
+        }
+        
+        /* Responsive Fix for Smaller Screens */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            nav ul {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    a{
+        text-decoration: none;
+        color: rgb(1, 0, 0);
+        
+    }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <nav>
+
+
+        <h1>MY Blogs</h1>
+        <ul>
+            <li><a href="./pages/categories.html">Categories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="./pages/about.html">About</a></li>
+            <li><a href="./pages/createpost.html">Create Post</a></li>
+            <li><a href="./pages/deltpost.html">Delete Post</a></li>
+        </ul>
+    </nav>
+
+
+
+    <section id="blog-container">
+        <h2>Recent Posts</h2>
+        <div id="posts"></div>
+    </section>
+
+    <footer>
+        <p>Mohammed Taha 2025</p>
+        <a href="#">Linkedin   </a>|<a href="#">   Github</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+
+
+
+
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 19,
+                    "direction": "none",
+                    "random": false,
+                    "straight":false,
+                    "out_mode": "out"
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "repulse": { "distance": 100, "duration": 0.4 },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+           
+        });
+
+
+
+
+
+        async function fetchPosts() {
+    try {
+        const response = await fetch('http://localhost:3000/api/posts');
+        const posts = await response.json();
+
+        const postsContainer = document.getElementById('posts');
+        postsContainer.innerHTML = '';
+
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+            postElement.innerHTML = `<a href="post.html?id=${post.id}" class="post-link">
+                <h3>${post.title}</h3>
+                <p>${post.content.substring(0, 100)}...</p>
+                <small>By ${post.author}</small></a>
+            `;
+            postsContainer.appendChild(postElement);
+        });
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+    }
+}
+
+fetchPosts();
+
+    </script>
+</body>
+
+</html>

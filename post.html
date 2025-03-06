@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Post Container */
+#post-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #E8A87C; /* Warm Coral */
+    text-align: center;
+}
+
+/* Post Title */
+#post-title {
+    font-size: 2rem;
+    color: #2C2C2C; /* Charcoal */
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Post Content */
+#post-content {
+    font-size: 1.2rem;
+    color: #2C2C2C; /* Charcoal */
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* Post Author */
+#post-author {
+    display: block;
+    font-size: 1rem;
+    font-style: italic;
+    color: #555;
+    margin-top: 15px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #post-container {
+        margin: 30px 15px;
+        padding: 20px;
+    }
+
+    #post-title {
+        font-size: 1.7rem;
+    }
+
+    #post-content {
+        font-size: 1rem;
+    }
+
+    #post-author {
+        font-size: 0.9rem;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>MY Blogs</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <section id="post-container">
+        <h2 id="post-title"></h2>
+        <p id="post-content"></p>
+        <small id="post-author"></small>
+    </section>
+
+    <footer>
+        <p>Mohammed Taha 2025</p>
+        <a href="#">Linkedin   </a>|<a href="#">   Github</a>
+    </footer>
+
+    <script>
+        async function fetchPostDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            if (!postId) {
+                document.getElementById('post-container').innerHTML = '<p>Post not found.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/posts/${postId}`);
+                const post = await response.json();
+
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-content').textContent = post.content;
+                document.getElementById('post-author').textContent = `By ${post.author}`;
+            } catch (error) {
+                console.error('Error fetching post:', error);
+            }
+        }
+
+        fetchPostDetails();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Categories</title>
+    <link rel="stylesheet" href="../styles.css">
+
+    <style>
+        /* Categories Container */
+        .categories-container {
+            text-align: center;
+            margin: 5px auto 30px;
+            padding: 20px;
+            background: #2C2C2C;
+            /* Charcoal Gray */
+            color: #F4F4F4;
+            /* Soft Gray */
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+        }
+
+        .categories-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #E8A87C;
+            /* Warm Coral */
+        }
+
+        #tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag-btn {
+            background: #E8A87C;
+            /* Warm Coral */
+            color: #2C2C2C;
+            /* Charcoal */
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag-btn:hover {
+            background: #F4F4F4;
+            /* Soft Gray */
+            color: #E8A87C;
+            transform: translateY(-2px);
+        }
+
+        /* Blog Posts Section */
+        #posts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Individual Post */
+        .post {
+            background: #F4F4F4;
+            /* Soft Gray */
+            border: 2px solid #E8A87C;
+            /* Warm Coral */
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .post h3 {
+            color: #2C2C2C;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            font-size: 1rem;
+            color: #2C2C2C;
+            line-height: 1.5;
+        }
+
+        /* Read More Button */
+        .read-more {
+            display: inline-block;
+            background: #E8A87C;
+            /* Warm Coral */
+            color: #2C2C2C;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #2C2C2C;
+            color: #E8A87C;
+            transform: scale(1.05);
+        }
+        
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .categories-container {
+                width: 90%;
+            }
+
+            #tags {
+                gap: 10px;
+            }
+
+            .post {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <nav>
+        <h1>MY Blogs</h1>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./login.html">Login</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./createpost.html">Create Post</a></li>
+            <li><a href="./deltpost.html">Delete Post</a></li>
+        </ul>
+    </nav>
+    <div class="categories-container">
+        <h2>Categories</h2>
+        <div id="tags">
+            <button class="tag-btn" onclick="filterByTag('JavaScript')">JavaScript</button>
+            <button class="tag-btn" onclick="filterByTag('Java')">Java</button>
+            <button class="tag-btn" onclick="filterByTag('React')">React</button>
+        </div>
+    </div>
+
+    <h2 style="text-align: center;">Blog Posts</h2>
+    <div id="posts" class="posts-container"></div>
+
+    <footer>
+        <p>Mohammed Taha 2025</p>
+        <a href="#">Linkedin   </a>|<a href="#">   Github</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+         particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 19,
+                    "direction": "none",
+                    "random": false,
+                    "straight":false,
+                    "out_mode": "out"
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "repulse": { "distance": 100, "duration": 0.4 },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+           
+        });
+
+        
+  // Fetch and display all blog posts initially
+  async function fetchPosts() {
+    try {
+      const response = await fetch('http://localhost:3000/api/posts');
+      const posts = await response.json();
+      displayPosts(posts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  }
+
+  // Fetch and display posts filtered by tag
+  async function filterByTag(tag) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/posts/category/${tag}`);
+      const posts = await response.json();
+      displayPosts(posts);
+    } catch (error) {
+      console.error('Error fetching filtered posts:', error);
+    }
+  }
+
+  // Display posts in the HTML
+  function displayPosts(posts) {
+    const postsContainer = document.getElementById('posts');
+    postsContainer.innerHTML = ''; // Clear previous posts
+
+    if (posts.length === 0) {
+      postsContainer.innerHTML = '<p style="text-align: center;">No posts found for this category.</p>';
+    } else {
+      posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.classList.add('post');
+        postElement.setAttribute('onclick', `window.location.href='post.html?id=${post.id}'`);
+        postElement.style.cursor = 'pointer'; // Makes it clear the post is clickable
+
+        postElement.innerHTML = `
+          <h3><a href="post.html?id=${post.id}" class="post-link">${post.title}</a></h3>
+          <p><strong>by ${post.author}</strong></p>
+          <p>${post.content.substring(0, 200)}...</p>
+          <button class="read-more">Read More</button>
+        `;
+
+        postsContainer.appendChild(postElement);
+      });
+    }
+  }
+
+  // Fetch all posts on page load
+  window.onload = fetchPosts;
+</script>
+
+</body>
+
+</html>
